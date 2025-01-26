@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChickenCoopAPI", "ChickenCoopAPI.csproj", "{76EB6815-76AD-F24C-D017-2C82472B5B0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76EB6815-76AD-F24C-D017-2C82472B5B0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76EB6815-76AD-F24C-D017-2C82472B5B0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76EB6815-76AD-F24C-D017-2C82472B5B0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76EB6815-76AD-F24C-D017-2C82472B5B0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6BEAF1CF-220C-476B-97E1-2AB7CD8B3D5C}
+	EndGlobalSection
+EndGlobal
