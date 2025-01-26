@@ -1,22 +1,21 @@
+using Microsoft.Extensions.Options;
+using ChickenCoop.Models;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 
 namespace ChickenCoop.Services
 {
     public class AcsService : IAcsService
     {
         private readonly HttpClient _httpClient;
-        private readonly string? _acsEndpoint;
-        private readonly string? _acsAccessKey;
+        private readonly AcsSettings _acsSettings;
 
-        public AcsService(IConfiguration configuration)
+        public AcsService(IOptions<AcsSettings> acsSettings)
         {
             _httpClient = new HttpClient();
-            _acsEndpoint = configuration["ACS:Endpoint"];
-            _acsAccessKey = configuration["ACS:AccessKey"];
+            _acsSettings = acsSettings.Value;
         }
 
         public async Task SendWhatsAppMessage(string phoneNumber, string messageText)
@@ -30,19 +29,20 @@ namespace ChickenCoop.Services
 
             var jsonContent = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
 
-            _httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _acsAccessKey);
+            _httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _acsSettings.AccessKey);
 
-            var response = await _httpClient.PostAsync($"{_acsEndpoint}/messages", jsonContent);
+            var response = await _httpClient.PostAsync($"{_acsSettings.Endpoint}/messages", jsonContent);
             response.EnsureSuccessStatusCode();
         }
 
+        // ✅ Implement the missing method for interactive WhatsApp messages
         public async Task SendInteractiveWhatsAppMessage(object messagePayload)
         {
             var jsonContent = new StringContent(JsonSerializer.Serialize(messagePayload), Encoding.UTF8, "application/json");
 
-            _httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _acsAccessKey);
+            _httpClient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _acsSettings.AccessKey);
 
-            var response = await _httpClient.PostAsync($"{_acsEndpoint}/messages", jsonContent);
+            var response = await _httpClient.PostAsync($"{_acsSettings.Endpoint}/messages", jsonContent);
             response.EnsureSuccessStatusCode();
         }
     }

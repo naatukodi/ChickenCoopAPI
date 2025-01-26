@@ -1,4 +1,5 @@
 using ChickenCoop.Services; // Replace 'YourNamespace' with the actual namespace containing IAzureCommunicationService
+using ChickenCoop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IAzureCommunicationService, AzureCommunicationService>();
 builder.Services.AddSingleton<IAcsService, AcsService>();
+builder.Services.Configure<AcsSettings>(builder.Configuration.GetSection("ACS"));
 
 var app = builder.Build();
 
